@@ -3,18 +3,27 @@ import logo from './logo.svg';
 import './App.css';
 import Person from './Person/Person'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-     Hello React course from Max!
-        </p>
-        <Person name="Oleg" age="42">My hobbies: Music</Person>
-        <Person name="Max" age="29"/>
+class App extends React.Component {
+  state={
+    person:[
+      {name:'Oleg', age:42},
+      {name:'Max', age:29}
 
-        {/* <a
+    ]
+  }
+  render() {
+
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <p>
+            Hello React course from Max!
+        </p>
+          <Person name={this.state.person[0].name} age={this.state.person[0].age} >My hobbies: Music</Person>
+          <Person name={this.state.person[1].name}  age={this.state.person[1].age}  />
+
+          {/* <a
           className="App-link"
           href="https://reactjs.org"
           target="_blank"
@@ -22,9 +31,11 @@ function App() {
         >
           Learn React
         </a> */}
-      </header>
-    </div>
-  );
+        </header>
+      </div>
+    );
+  }
+
 }
 
 export default App;
