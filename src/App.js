@@ -39,6 +39,14 @@ class App extends React.Component {
 
   render() {
 
+    const styleButton= {
+      backgroundColor:'lightgreen',
+      width:'150px',
+      height:'40px',
+      fontSize:'18px',
+      cursor:'pointer'
+
+    }
     return (
       <div className="App">
         <header className="App-header">
@@ -46,7 +54,9 @@ class App extends React.Component {
           <p>
             Hello React course from Max!
         </p>
-          <button onClick={this.switchNameHandler.bind(this,'Maria')}>Switch Name</button>
+          <button 
+          style={styleButton}
+          onClick={this.switchNameHandler.bind(this,'Maria')}>Switch Name</button>
           <Person name={this.state.persons[0].name} age={this.state.persons[0].age} >My hobbies: Music</Person>
           <Person 
           changed = {this.nameChanchedHandler}          
