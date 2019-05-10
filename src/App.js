@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 import Person from './Person/Person'
 
 // example stateful class-based component
@@ -11,7 +10,8 @@ class App extends React.Component {
       { name: 'Oleg', age: 42 },
       { name: 'Max', age: 29 },
       { name: 'Anna', age: 25 }
-    ]
+    ],
+    showPerson:false
   }
 
   switchNameHandler = (newName) => {
@@ -37,6 +37,13 @@ class App extends React.Component {
     })
   }
 
+  togglePersonsHandler = () => {
+this.setState({
+  showPerson: !this.state.showPerson
+
+})
+  }
+
   render() {
 
     const styleButton= {
@@ -49,24 +56,30 @@ class App extends React.Component {
     }
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+        {/* <header className="App-header"> */}
           <p>
             Hello React course from Max!
         </p>
           <button 
           style={styleButton}
-          onClick={this.switchNameHandler.bind(this,'Maria')}>Switch Name</button>
-          <Person name={this.state.persons[0].name} age={this.state.persons[0].age} >My hobbies: Music</Person>
+          onClick={this.togglePersonsHandler}>Toggle Persons</button>
+      {this.state.showPerson ? <div className="App-Persons">
+          <Person 
+          name={this.state.persons[0].name} 
+          age={this.state.persons[0].age} >My hobbies: Music</Person>
+
           <Person 
           changed = {this.nameChanchedHandler}          
-          name={this.state.persons[1].name} age={this.state.persons[1].age} />
+          name={this.state.persons[1].name} 
+          age={this.state.persons[1].age} />
+
           <Person 
           click={()=>this.switchNameHandler('Mark')} 
-          // changed = {this.nameChanchedHandler}
           name={this.state.persons[2].name} age={this.state.persons[2].age} />
+          </div> : null }
 
-        </header>
+
+        {/* </header> */}
       </div>
     );
   }
@@ -120,14 +133,7 @@ export default App;
 
 //         <Person name={personsState.persons[0].name} age={personsState.persons[0].age} >My hobbies: Music</Person>
 //         <Person name={personsState.persons[1].name} age={personsState.persons[1].age} />
-        {/* <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a> */}
+   
 //       </header>
 //     </div>
 //   );
