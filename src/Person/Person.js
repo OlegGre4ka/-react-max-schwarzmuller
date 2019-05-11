@@ -4,8 +4,13 @@ import './Person.scss';
 const Person = (props) => {
     return (
         <div className="Person">
-        <p onClick={props.click}>I'm a {props.name} and I'm {props.age} years old! <span>{props.children}</span></p>
-        <input type="text" onChange={props.changed} value={props.name}/>
+            <p
+                onClick={props.click}
+            >I'm a {props.name} and I'm {props.age} years old! <span>{props.children}</span></p>
+            <input
+                type="text"
+                onChange={props.changed}
+                value={props.name} />
         </div>
     )
 }

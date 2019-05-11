@@ -7,79 +7,71 @@ import Person from './Person/Person'
 class App extends React.Component {
   state = {
     persons: [
-      { name: 'Oleg', age: 42 },
-      { name: 'Max', age: 29 },
-      { name: 'Anna', age: 25 }
+      { id:'asdf1', name: 'Oleg', age: 42 },
+      { id:'qwrt3', name: 'Max', age: 29 },
+      { id:'lkjh2', name: 'Anna', age: 25 }
     ],
-    showPerson:false
+    showPerson: false
   }
 
-  switchNameHandler = (newName) => {
-    console.log('Was swirched name!');
-    this.setState({
-      persons: [
-        { name: 'Oleg', age: 42 },
-        { name:newName, age: 29 },
-        { name: 'Anna', age: 25 }
+  deletePersonHandler = (indexPerson) => {
+    let persons = [...this.state.persons];
+    persons.splice(indexPerson, 1);
 
-      ]
+    this.setState({
+      persons
     })
   }
 
-  nameChanchedHandler = event => {
-    this.setState({
-      persons: [
-        { name: 'Oleg', age: 42 },
-        { name:event.target.value, age: 29 },
-        { name: 'Anna', age: 25 }
+  nameChanchedHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex(p=>p.id===id);
+    let persons = [...this.state.persons]
+    persons[personIndex].name= event.target.value;
 
-      ]
+    this.setState({
+      persons
     })
   }
 
   togglePersonsHandler = () => {
-this.setState({
-  showPerson: !this.state.showPerson
-
-})
+    this.setState({
+      showPerson: !this.state.showPerson
+    })
   }
 
   render() {
 
-    const styleButton= {
-      backgroundColor:'lightgreen',
-      width:'150px',
-      height:'40px',
-      fontSize:'18px',
-      cursor:'pointer'
-
+    const styleButton = {
+      backgroundColor: 'lightgreen',
+      width: '150px',
+      height: '40px',
+      fontSize: '18px',
+      cursor: 'pointer'
     }
+
+    const toggleButton = (
+      <button
+      style={styleButton}
+      onClick={this.togglePersonsHandler}>Toggle Persons</button>
+    )
+
     return (
       <div className="App">
-        {/* <header className="App-header"> */}
-          <p>
-            Hello React course from Max!
+        <p>
+          Hello React course from Max!
         </p>
-          <button 
-          style={styleButton}
-          onClick={this.togglePersonsHandler}>Toggle Persons</button>
-      {this.state.showPerson ? <div className="App-Persons">
-          <Person 
-          name={this.state.persons[0].name} 
-          age={this.state.persons[0].age} >My hobbies: Music</Person>
-
-          <Person 
-          changed = {this.nameChanchedHandler}          
-          name={this.state.persons[1].name} 
-          age={this.state.persons[1].age} />
-
-          <Person 
-          click={()=>this.switchNameHandler('Mark')} 
-          name={this.state.persons[2].name} age={this.state.persons[2].age} />
-          </div> : null }
-
-
-        {/* </header> */}
+        {toggleButton}
+        
+        {this.state.showPerson ? <div className="App-Persons">
+          {this.state.persons.map((person, i) => (
+            <Person
+              click={() => this.deletePersonHandler(i)}
+              changed = {(event)=>this.nameChanchedHandler(event, person.id)}
+              name={person.name}
+              age={person.age}
+              key={person.id} />
+          ))}
+        </div> : null}
       </div>
     );
   }
@@ -133,7 +125,7 @@ export default App;
 
 //         <Person name={personsState.persons[0].name} age={personsState.persons[0].age} >My hobbies: Music</Person>
 //         <Person name={personsState.persons[1].name} age={personsState.persons[1].age} />
-   
+
 //       </header>
 //     </div>
 //   );
