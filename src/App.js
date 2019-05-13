@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
+// import React, { useState } from 'react';
+import Radium, { StyleRoot } from 'radium';
 import './App.scss';
-import Person from './Person/Person'
+import Person from './Person/Person';
 
 // example stateful class-based component
 
 class App extends React.Component {
   state = {
     persons: [
-      { id:'asdf1', name: 'Oleg', age: 42 },
-      { id:'qwrt3', name: 'Max', age: 29 },
-      { id:'lkjh2', name: 'Anna', age: 25 }
+      { id: 'asdf1', name: 'Oleg', age: 42 },
+      { id: 'qwrt3', name: 'Max', age: 29 },
+      { id: 'lkjh2', name: 'Anna', age: 25 }
     ],
     showPerson: false
   }
@@ -24,9 +26,9 @@ class App extends React.Component {
   }
 
   nameChanchedHandler = (event, id) => {
-    const personIndex = this.state.persons.findIndex(p=>p.id===id);
+    const personIndex = this.state.persons.findIndex(p => p.id === id);
     let persons = [...this.state.persons]
-    persons[personIndex].name= event.target.value;
+    persons[personIndex].name = event.target.value;
 
     this.setState({
       persons
@@ -42,43 +44,65 @@ class App extends React.Component {
   render() {
 
     const styleButton = {
-      backgroundColor: 'lightgreen',
+      backgroundColor: 'green',
+      color: 'white',
       width: '150px',
       height: '40px',
       fontSize: '18px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
     }
+    if
+      (this.state.showPerson === true) {
+      styleButton.backgroundColor = 'red'; styleButton[':hover'] = {
+        backgroundColor: 'pink',
+        color: 'black'
+      }
+    } else { styleButton.backgroundColor = 'green' }
 
     const toggleButton = (
       <button
-      style={styleButton}
-      onClick={this.togglePersonsHandler}>Toggle Persons</button>
+        style={styleButton}
+        onClick={this.togglePersonsHandler}>Toggle Persons</button>
     )
 
+    // const classes = ['red', 'bold'].join(' ');
+    const classes = [];
+    if (this.state.persons.length <= 2) { classes.push('red') };
+    if (this.state.persons.length <= 1) { classes.push('bold') };
+
     return (
-      <div className="App">
-        <p>
-          Hello React course from Max!
+      <StyleRoot>
+        <div className="App">
+          <p>
+            Hello React course from Max!
         </p>
-        {toggleButton}
-        
-        {this.state.showPerson ? <div className="App-Persons">
-          {this.state.persons.map((person, i) => (
-            <Person
-              click={() => this.deletePersonHandler(i)}
-              changed = {(event)=>this.nameChanchedHandler(event, person.id)}
-              name={person.name}
-              age={person.age}
-              key={person.id} />
-          ))}
-        </div> : null}
-      </div>
+
+          <p className={classes.join(' ')}>This is really working!!!</p>
+
+          {toggleButton}
+
+          {this.state.showPerson ? <div className="App-Persons">
+            {this.state.persons.map((person, i) => (
+              <Person
+                click={() => this.deletePersonHandler(i)}
+                changed={(event) => this.nameChanchedHandler(event, person.id)}
+                name={person.name}
+                age={person.age}
+                key={person.id} />
+            ))}
+          </div> : null}
+        </div>
+      </StyleRoot>
     );
   }
 
 }
 
-export default App;
+export default Radium(App);
 
 // example React Hooks - UseState() in functional component
 
