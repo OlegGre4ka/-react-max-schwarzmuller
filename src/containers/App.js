@@ -2,7 +2,9 @@ import React from 'react';
 // import React, { useState } from 'react';
 import Radium, { StyleRoot } from 'radium';
 import './App.scss';
-import Person from './Person/Person';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
+import ToggleButton from '../components/Cockpit/ToggleButton';
 
 // example stateful class-based component
 
@@ -43,58 +45,20 @@ class App extends React.Component {
 
   render() {
 
-    const styleButton = {
-      backgroundColor: 'green',
-      color: 'white',
-      width: '150px',
-      height: '40px',
-      fontSize: '18px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
-    }
-    if
-      (this.state.showPerson === true) {
-      styleButton.backgroundColor = 'red'; styleButton[':hover'] = {
-        backgroundColor: 'pink',
-        color: 'black'
-      }
-    } else { styleButton.backgroundColor = 'green' }
-
-    const toggleButton = (
-      <button
-        style={styleButton}
-        onClick={this.togglePersonsHandler}>Toggle Persons</button>
+    const persons = (
+      this.state.showPerson ? <div className="App-Persons">
+        <Persons persons={this.state.persons}
+          clicked={this.deletePersonHandler}
+          changed={this.nameChanchedHandler}
+        />
+      </div> : null
     )
-
-    // const classes = ['red', 'bold'].join(' ');
-    const classes = [];
-    if (this.state.persons.length <= 2) { classes.push('red') };
-    if (this.state.persons.length <= 1) { classes.push('bold') };
-
     return (
       <StyleRoot>
         <div className="App">
-          <p>
-            Hello React course from Max!
-        </p>
-
-          <p className={classes.join(' ')}>This is really working!!!</p>
-
-          {toggleButton}
-
-          {this.state.showPerson ? <div className="App-Persons">
-            {this.state.persons.map((person, i) => (
-              <Person
-                click={() => this.deletePersonHandler(i)}
-                changed={(event) => this.nameChanchedHandler(event, person.id)}
-                name={person.name}
-                age={person.age}
-                key={person.id} />
-            ))}
-          </div> : null}
+          <Cockpit persons={this.state.persons} />
+          <ToggleButton showPerson={this.state.showPerson} clicked={this.togglePersonsHandler}/>
+          {persons}
         </div>
       </StyleRoot>
     );
