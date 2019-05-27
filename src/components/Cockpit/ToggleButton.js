@@ -1,4 +1,6 @@
 import React from 'react';
+import Radium from 'radium';
+
 
 const ToggleButton = props => {
     
@@ -26,4 +28,4 @@ const ToggleButton = props => {
         style={styleButton}
         onClick={props.clicked}>Toggle Persons</button>)
 }
-export default ToggleButton;
+export default Radium(ToggleButton);

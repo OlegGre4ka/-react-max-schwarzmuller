@@ -9,7 +9,10 @@ import ToggleButton from '../components/Cockpit/ToggleButton';
 // example stateful class-based component
 
 class App extends React.Component {
-  state = {
+  constructor(props){
+    console.log('[App.js],constructor')
+    super(props)
+  this.state = {
     persons: [
       { id: 'asdf1', name: 'Oleg', age: 42 },
       { id: 'qwrt3', name: 'Max', age: 29 },
@@ -17,7 +20,31 @@ class App extends React.Component {
     ],
     showPerson: false
   }
+}
+    static getDerivedStateFromProps(props,state){
+        console.log('[App.js],getDerivedStateFromProps',props)
+        return state
+    }
+ 
+  // getSnapshotBeforeUpdate(prevProps, prevState) {
+  //     console.log('[Persons.js],getSnapshotBeforeUpdate');
+  //     return { message: "Snapshot!" }
 
+  // }
+  componentDidMount(){
+    console.log('[App.js],componentDidMount');
+
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('[App.js],shouldComponentUpdate');
+
+    return true
+}
+  componentDidUpdate(prevProps, prevState, snapshort) {
+      console.log('[App.js],componentDidUpdate');
+      // console.log(snapshort)
+  }
+  
   deletePersonHandler = (indexPerson) => {
     let persons = [...this.state.persons];
     persons.splice(indexPerson, 1);
@@ -44,6 +71,7 @@ class App extends React.Component {
   }
 
   render() {
+    console.log('[App.js],rendering...');
 
     const persons = (
       this.state.showPerson ? <div className="App-Persons">
@@ -56,7 +84,7 @@ class App extends React.Component {
     return (
       <StyleRoot>
         <div className="App">
-          <Cockpit persons={this.state.persons} />
+          <Cockpit persons={this.state.persons} title={this.props.appTitle}/>
           <ToggleButton showPerson={this.state.showPerson} clicked={this.togglePersonsHandler}/>
           {persons}
         </div>

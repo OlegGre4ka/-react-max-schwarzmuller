@@ -6,7 +6,7 @@ const cockpit = props => {
     if (props.persons.length <= 1) { classes.push('bold') };
     return (
         <>
-            <h3>Hello React course from Max!</h3>
+            <h3>Hello React {props.title}!</h3>
 
             <p className={classes.join(' ')}>This is really working!!!</p>
         </>
