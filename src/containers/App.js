@@ -18,7 +18,8 @@ class App extends React.Component {
       { id: 'qwrt3', name: 'Max', age: 29 },
       { id: 'lkjh2', name: 'Anna', age: 25 }
     ],
-    showPerson: false
+    showPerson: false,
+    showCockpit:true
   }
 }
     static getDerivedStateFromProps(props,state){
@@ -69,7 +70,9 @@ class App extends React.Component {
       showPerson: !this.state.showPerson
     })
   }
-
+showCockpit=()=>{
+  this.setState({showCockpit:!this.state.showCockpit})
+}
   render() {
     console.log('[App.js],rendering...');
 
@@ -84,7 +87,8 @@ class App extends React.Component {
     return (
       <StyleRoot>
         <div className="App">
-          <Cockpit persons={this.state.persons} title={this.props.appTitle}/>
+          <button onClick={this.showCockpit}>ShowCockpit</button>
+        {this.state.showCockpit&&<Cockpit lengthPersons={this.state.persons.length} title={this.props.appTitle}/>}
           <ToggleButton showPerson={this.state.showPerson} clicked={this.togglePersonsHandler}/>
           {persons}
         </div>
