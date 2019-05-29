@@ -16,7 +16,7 @@ class App extends React.Component {
     super(props)
     this.state = {
       persons: [
-        { id: 'asdf1', name: 'Oleg', age: '42' },
+        { id: 'asdf1', name: 'Oleg', age: 42 },
         { id: 'qwrt3', name: 'Max', age: 29 },
         { id: 'lkjh2', name: 'Anna', age: 25 }
       ],
@@ -25,6 +25,7 @@ class App extends React.Component {
       counterChanges: 0
     }
   }
+
   // static getDerivedStateFromProps(props, state) {
   //   console.log('[App.js],getDerivedStateFromProps', props)
   //   return state
@@ -35,10 +36,10 @@ class App extends React.Component {
   //     return { message: "Snapshot!" }
 
   // }
-  // componentDidMount() {
-  //   console.log('[App.js],componentDidMount');
-
-  // }
+//   componentDidMount() {
+//     console.log('[App.js],componentDidMount');
+// document.querySelector('input').focus()
+//   }
   // shouldComponentUpdate(nextProps, nextState) {
   //   console.log('[App.js],shouldComponentUpdate');
 
@@ -48,14 +49,13 @@ class App extends React.Component {
   //   console.log('[App.js],componentDidUpdate');
   //   // console.log(snapshort)
   // }
-
   deletePersonHandler = (indexPerson) => {
     let persons = [...this.state.persons];
     persons.splice(indexPerson, 1);
-
     this.setState({
       persons
     })
+
   }
 
   nameChanchedHandler = (event, id) => {

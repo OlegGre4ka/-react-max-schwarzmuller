@@ -5,15 +5,33 @@ import styles from './Person.module.scss';
 import WithClasses from '../../../hoc/WithClasses';
 
 class Person extends Component {
-    // constructor(props){
-    //     super(props)
-    // }
+    constructor(props){
+        super(props)
+        this.inputElRef= React.createRef()
+    }
     // styles with Radium - media query
     // const style={
     //     '@media(min-width:500px)':{
     //         width:'450px'
     //     }
     // }
+    
+  // static getDerivedStateFromProps(props, state) {
+  //   console.log('[App.js],getDerivedStateFromProps', props)
+  //   return state
+  // }
+    componentDidMount() {
+        console.log('[App.js],componentDidMount');
+        // document.querySelector('input').focus();//focus on first element
+        // this.inputEl.focus();//focus on last element
+        this.inputElRef.current.focus();
+    }
+  componentDidUpdate(prevProps, prevState, snapshort) {
+    console.log('[App.js],componentDidUpdate');
+    // console.log(snapshort)
+  this.inputElRef.current.focus();
+
+  }
     render() {
 
         return (
@@ -27,6 +45,8 @@ class Person extends Component {
                 >I'm a {this.props.name} and I'm {this.props.age} years old! <span>{this.props.children}</span></p>
                 <input
                     className={styles.Input}
+                    // ref={inputEl=>this.inputEl=inputEl}
+                    ref={this.inputElRef}
                     type="text"
                     onChange={this.props.changed}
                     value={this.props.name} />
@@ -39,9 +59,9 @@ class Person extends Component {
 Person.propTypes = {
     click: PropTypes.func,
     name: PropTypes.string,
-    age:PropTypes.number,
+    age: PropTypes.number,
     children: PropTypes.string,
-    changed:PropTypes.func
+    changed: PropTypes.func
 }
 export default Person;
 // export default Radium(Person);
