@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 // import Radium from 'radium';
 import styles from'./Person.module.scss';
+import WithClasses from '../../../hoc/WithClasses';
 
 class Person extends Component {
     // constructor(props){
@@ -15,7 +16,9 @@ class Person extends Component {
     render(){
 
     return (
-        <div className={styles.Person}/* style={style} */  >
+        // <div className={styles.Person}/* style={style} */  >
+        <WithClasses classes={styles.Person} >
+
             <p
               className={styles.P}
               onClick={this.props.click}
@@ -26,7 +29,8 @@ class Person extends Component {
                 type="text"
                 onChange={this.props.changed}
                 value={this.props.name} />
-        </div>
+                </WithClasses>
+        // </div>
     )
 }
 

@@ -1,7 +1,9 @@
 import React from 'react';
 // import React, { useState } from 'react';
-import Radium, { StyleRoot } from 'radium';
-import './App.scss';
+// import Radium, { StyleRoot } from 'radium';
+import './App.module.scss';
+import classes from './App.module.scss';
+import withClass from '../hoc/withClass';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 import ToggleButton from '../components/Cockpit/ToggleButton';
@@ -9,30 +11,30 @@ import ToggleButton from '../components/Cockpit/ToggleButton';
 // example stateful class-based component
 
 class App extends React.Component {
-  constructor(props){
+  constructor(props) {
     console.log('[App.js],constructor')
     super(props)
-  this.state = {
-    persons: [
-      { id: 'asdf1', name: 'Oleg', age: 42 },
-      { id: 'qwrt3', name: 'Max', age: 29 },
-      { id: 'lkjh2', name: 'Anna', age: 25 }
-    ],
-    showPerson: false,
-    showCockpit:true
-  }
-}
-    static getDerivedStateFromProps(props,state){
-        console.log('[App.js],getDerivedStateFromProps',props)
-        return state
+    this.state = {
+      persons: [
+        { id: 'asdf1', name: 'Oleg', age: 42 },
+        { id: 'qwrt3', name: 'Max', age: 29 },
+        { id: 'lkjh2', name: 'Anna', age: 25 }
+      ],
+      showPerson: false,
+      showCockpit: true
     }
- 
+  }
+  static getDerivedStateFromProps(props, state) {
+    console.log('[App.js],getDerivedStateFromProps', props)
+    return state
+  }
+
   // getSnapshotBeforeUpdate(prevProps, prevState) {
   //     console.log('[Persons.js],getSnapshotBeforeUpdate');
   //     return { message: "Snapshot!" }
 
   // }
-  componentDidMount(){
+  componentDidMount() {
     console.log('[App.js],componentDidMount');
 
   }
@@ -40,12 +42,12 @@ class App extends React.Component {
     console.log('[App.js],shouldComponentUpdate');
 
     return true
-}
-  componentDidUpdate(prevProps, prevState, snapshort) {
-      console.log('[App.js],componentDidUpdate');
-      // console.log(snapshort)
   }
-  
+  componentDidUpdate(prevProps, prevState, snapshort) {
+    console.log('[App.js],componentDidUpdate');
+    // console.log(snapshort)
+  }
+
   deletePersonHandler = (indexPerson) => {
     let persons = [...this.state.persons];
     persons.splice(indexPerson, 1);
@@ -70,14 +72,14 @@ class App extends React.Component {
       showPerson: !this.state.showPerson
     })
   }
-showCockpit=()=>{
-  this.setState({showCockpit:!this.state.showCockpit})
-}
+  showCockpit = () => {
+    this.setState({ showCockpit: !this.state.showCockpit })
+  }
   render() {
-    console.log('[App.js],rendering...');
+    console.log('[App.js],rendering...',this.props);
 
     const persons = (
-      this.state.showPerson ? <div className="App-Persons">
+      this.state.showPerson ? <div className={classes.AppPersons}>
         <Persons persons={this.state.persons}
           clicked={this.deletePersonHandler}
           changed={this.nameChanchedHandler}
@@ -85,20 +87,22 @@ showCockpit=()=>{
       </div> : null
     )
     return (
-      <StyleRoot>
-        <div className="App">
-          <button onClick={this.showCockpit}>ShowCockpit</button>
-        {this.state.showCockpit&&<Cockpit lengthPersons={this.state.persons.length} title={this.props.appTitle}/>}
-          <ToggleButton showPerson={this.state.showPerson} clicked={this.togglePersonsHandler}/>
-          {persons}
-        </div>
-      </StyleRoot>
+      // <StyleRoot>
+      //   <div className="App">
+      <>
+        <button onClick={this.showCockpit}>ShowCockpit</button>
+        {this.state.showCockpit && <Cockpit lengthPersons={this.state.persons.length} title={this.props.appTitle} />}
+        <ToggleButton showPerson={this.state.showPerson} clicked={this.togglePersonsHandler} />
+        {persons}
+      </>
+      //   {/* </div> */}
+      // {/* </StyleRoot> */}
     );
   }
 
 }
 
-export default Radium(App);
+export default withClass(App, classes.App);
 
 // example React Hooks - UseState() in functional component
 

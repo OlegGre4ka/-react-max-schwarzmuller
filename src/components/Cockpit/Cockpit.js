@@ -1,13 +1,14 @@
-import React,{useEffect} from 'react';
+import React, { useEffect } from 'react';
 import './Cockpit.scss';
+import Aux from '../../hoc/Auxiliary';
 
 const Cockpit = props => {
-    useEffect(()=>{
+    useEffect(() => {
         console.log('[Cockpit.js],useEffect-1');
         // setTimeout(()=>{
         //     alert('Cockpit useEffect()-1-one time');
         // },1000)
-    },[]);
+    }, []);
 
     // useEffect(()=>{
     //     console.log('[Cockpit.js],useEffect-2');
@@ -23,13 +24,13 @@ const Cockpit = props => {
     //     },2500)
     // },[props.persons]);
 
-    useEffect(()=>{
-        return ()=>{
+    useEffect(() => {
+        return () => {
             // alert('Cockpit useEffect()-4-useEffect-4-as componentUnMount');
 
             console.log('[Cockpit.js],useEffect-4-as componentUnMount');
         }
-    },);
+    });
 
     const classes = [];
     // alert('Cockpit useEffect()');
@@ -37,11 +38,14 @@ const Cockpit = props => {
     if (props.lengthPersons <= 2) { classes.push('red') };
     if (props.lengthPersons <= 1) { classes.push('bold') };
     return (
-        <>
-            <h3>Hello React {props.title}!</h3>
+        // <>
+        <Aux>
+            <h3 >Hello React {props.title}!</h3>
 
             <p className={classes.join(' ')}>This is really working!!!</p>
-        </>
+        </Aux>
+
+        // </>
     )
 }
 
