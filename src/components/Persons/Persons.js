@@ -14,22 +14,23 @@ class Persons extends PureComponent {
     //         return false
     //     }
     // }
-    getSnapshotBeforeUpdate(prevProps, prevState) {
-        console.log('[Persons.js],getSnapshotBeforeUpdate');
-        return { message: "Snapshot!" }
+    // getSnapshotBeforeUpdate(prevProps, prevState) {
+    //     console.log('[Persons.js],getSnapshotBeforeUpdate');
+    //     return { message: "Snapshot!" }
 
-    }
-    componentDidUpdate(prevProps, prevState, snapshort) {
-        console.log('[Persons.js],componentDidUpdate');
-        console.log(snapshort)
-    }
+    // }
+    // componentDidUpdate(prevProps, prevState, snapshort) {
+    //     console.log('[Persons.js],componentDidUpdate');
+    //     console.log(snapshort)
+    // }
 
-    componentWillUnmount() {
-        console.log('[Persons.js],componentWillUnmount');
+    // componentWillUnmount() {
+    //     console.log('[Persons.js],componentWillUnmount');
 
-    }
+    // }
+
     render() {
-        console.log('[Persons.js],rendering...');
+        // console.log('[Persons.js],rendering...');
 
         return (
             this.props.persons.map((person, i) =>

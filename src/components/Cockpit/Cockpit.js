@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
+import React/* { useEffect }*/ from 'react';
 import './Cockpit.scss';
 import Aux from '../../hoc/Auxiliary';
 
 const Cockpit = props => {
-    useEffect(() => {
-        console.log('[Cockpit.js],useEffect-1');
-        // setTimeout(()=>{
-        //     alert('Cockpit useEffect()-1-one time');
-        // },1000)
-    }, []);
+    // useEffect(() => {
+    //     console.log('[Cockpit.js],useEffect-1');
+    //     // setTimeout(()=>{
+    //     //     alert('Cockpit useEffect()-1-one time');
+    //     // },1000)
+    // }, []);
 
     // useEffect(()=>{
     //     console.log('[Cockpit.js],useEffect-2');
@@ -24,13 +24,13 @@ const Cockpit = props => {
     //     },2500)
     // },[props.persons]);
 
-    useEffect(() => {
-        return () => {
-            // alert('Cockpit useEffect()-4-useEffect-4-as componentUnMount');
+    // useEffect(() => {
+    //     return () => {
+    //         // alert('Cockpit useEffect()-4-useEffect-4-as componentUnMount');
 
-            console.log('[Cockpit.js],useEffect-4-as componentUnMount');
-        }
-    });
+    //         console.log('[Cockpit.js],useEffect-4-as componentUnMount');
+    //     }
+    // });
 
     const classes = [];
     // alert('Cockpit useEffect()');

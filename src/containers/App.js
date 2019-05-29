@@ -12,41 +12,42 @@ import ToggleButton from '../components/Cockpit/ToggleButton';
 
 class App extends React.Component {
   constructor(props) {
-    console.log('[App.js],constructor')
+    // console.log('[App.js],constructor');
     super(props)
     this.state = {
       persons: [
-        { id: 'asdf1', name: 'Oleg', age: 42 },
+        { id: 'asdf1', name: 'Oleg', age: '42' },
         { id: 'qwrt3', name: 'Max', age: 29 },
         { id: 'lkjh2', name: 'Anna', age: 25 }
       ],
       showPerson: false,
-      showCockpit: true
+      showCockpit: true,
+      counterChanges: 0
     }
   }
-  static getDerivedStateFromProps(props, state) {
-    console.log('[App.js],getDerivedStateFromProps', props)
-    return state
-  }
+  // static getDerivedStateFromProps(props, state) {
+  //   console.log('[App.js],getDerivedStateFromProps', props)
+  //   return state
+  // }
 
   // getSnapshotBeforeUpdate(prevProps, prevState) {
   //     console.log('[Persons.js],getSnapshotBeforeUpdate');
   //     return { message: "Snapshot!" }
 
   // }
-  componentDidMount() {
-    console.log('[App.js],componentDidMount');
+  // componentDidMount() {
+  //   console.log('[App.js],componentDidMount');
 
-  }
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log('[App.js],shouldComponentUpdate');
+  // }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log('[App.js],shouldComponentUpdate');
 
-    return true
-  }
-  componentDidUpdate(prevProps, prevState, snapshort) {
-    console.log('[App.js],componentDidUpdate');
-    // console.log(snapshort)
-  }
+  //   return true
+  // }
+  // componentDidUpdate(prevProps, prevState, snapshort) {
+  //   console.log('[App.js],componentDidUpdate');
+  //   // console.log(snapshort)
+  // }
 
   deletePersonHandler = (indexPerson) => {
     let persons = [...this.state.persons];
@@ -62,8 +63,11 @@ class App extends React.Component {
     let persons = [...this.state.persons]
     persons[personIndex].name = event.target.value;
 
-    this.setState({
-      persons
+    this.setState(prevState => {
+      return {
+        persons,
+        counterChanges: prevState.counterChanges + 1
+      }
     })
   }
 
@@ -76,7 +80,7 @@ class App extends React.Component {
     this.setState({ showCockpit: !this.state.showCockpit })
   }
   render() {
-    console.log('[App.js],rendering...',this.props);
+    // console.log('[App.js],rendering...',this.props);
 
     const persons = (
       this.state.showPerson ? <div className={classes.AppPersons}>
@@ -93,6 +97,8 @@ class App extends React.Component {
         <button onClick={this.showCockpit}>ShowCockpit</button>
         {this.state.showCockpit && <Cockpit lengthPersons={this.state.persons.length} title={this.props.appTitle} />}
         <ToggleButton showPerson={this.state.showPerson} clicked={this.togglePersonsHandler} />
+        <p>Counter Changes: {this.state.counterChanges}</p>
+
         {persons}
       </>
       //   {/* </div> */}

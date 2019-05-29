@@ -1,6 +1,7 @@
-import React,{Component} from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 // import Radium from 'radium';
-import styles from'./Person.module.scss';
+import styles from './Person.module.scss';
 import WithClasses from '../../../hoc/WithClasses';
 
 class Person extends Component {
@@ -13,27 +14,34 @@ class Person extends Component {
     //         width:'450px'
     //     }
     // }
-    render(){
+    render() {
 
-    return (
-        // <div className={styles.Person}/* style={style} */  >
-        <WithClasses classes={styles.Person} >
+        return (
+            // <div className={styles.Person}/* style={style} */  >
+            <WithClasses classes={styles.Person} >
 
-            <p
-              className={styles.P}
-              onClick={this.props.click}
-              title="Remote?"
-            >I'm a {this.props.name} and I'm {this.props.age} years old! <span>{this.props.children}</span></p>
-            <input
-            className={styles.Input}
-                type="text"
-                onChange={this.props.changed}
-                value={this.props.name} />
-                </WithClasses>
-        // </div>
-    )
+                <p
+                    className={styles.P}
+                    onClick={this.props.click}
+                    title="Remote?"
+                >I'm a {this.props.name} and I'm {this.props.age} years old! <span>{this.props.children}</span></p>
+                <input
+                    className={styles.Input}
+                    type="text"
+                    onChange={this.props.changed}
+                    value={this.props.name} />
+            </WithClasses>
+            // </div>
+        )
+    }
 }
 
+Person.propTypes = {
+    click: PropTypes.func,
+    name: PropTypes.string,
+    age:PropTypes.number,
+    children: PropTypes.string,
+    changed:PropTypes.func
 }
 export default Person;
 // export default Radium(Person);
