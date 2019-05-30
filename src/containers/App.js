@@ -1,6 +1,6 @@
 import React from 'react';
 // import React, { useState } from 'react';
-// import Radium, { StyleRoot } from 'radium';
+// import { StyleRoot } from 'radium';
 import './App.module.scss';
 import classes from './App.module.scss';
 import withClass from '../hoc/withClass';
@@ -92,17 +92,16 @@ class App extends React.Component {
     )
     return (
       // <StyleRoot>
-      //   <div className="App">
       <>
-        <button onClick={this.showCockpit}>ShowCockpit</button>
+        <ToggleButton show={this.state.showCockpit} clicked={this.showCockpit} >Show Text</ToggleButton>
+        {/* <button onClick={this.showCockpit}>ShowCockpit</button> */}
         {this.state.showCockpit && <Cockpit lengthPersons={this.state.persons.length} title={this.props.appTitle} />}
-        <ToggleButton showPerson={this.state.showPerson} clicked={this.togglePersonsHandler} />
+        <ToggleButton show={this.state.showPerson} clicked={this.togglePersonsHandler}>Toggle Persons</ToggleButton>
         <p>Counter Changes: {this.state.counterChanges}</p>
 
         {persons}
       </>
-      //   {/* </div> */}
-      // {/* </StyleRoot> */}
+      //  </StyleRoot>
     );
   }
 

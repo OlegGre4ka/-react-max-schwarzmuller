@@ -5,9 +5,9 @@ import styles from './Person.module.scss';
 import WithClasses from '../../../hoc/WithClasses';
 
 class Person extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
-        this.inputElRef= React.createRef()
+        this.inputElRef = React.createRef()
     }
     // styles with Radium - media query
     // const style={
@@ -15,23 +15,23 @@ class Person extends Component {
     //         width:'450px'
     //     }
     // }
-    
-  // static getDerivedStateFromProps(props, state) {
-  //   console.log('[App.js],getDerivedStateFromProps', props)
-  //   return state
-  // }
+
+    // static getDerivedStateFromProps(props, state) {
+    //   console.log('[App.js],getDerivedStateFromProps', props)
+    //   return state
+    // }
     componentDidMount() {
         console.log('[App.js],componentDidMount');
         // document.querySelector('input').focus();//focus on first element
         // this.inputEl.focus();//focus on last element
         this.inputElRef.current.focus();
     }
-  componentDidUpdate(prevProps, prevState, snapshort) {
-    console.log('[App.js],componentDidUpdate');
-    // console.log(snapshort)
-  this.inputElRef.current.focus();
-
-  }
+    // componentDidUpdate(prevProps, prevState, snapshort) {
+    //     console.log('[App.js],componentDidUpdate');
+    //     // console.log(snapshort)
+    //     // document.querySelector('input').focus();//focus on first element
+    //     this.inputElRef.current.focus();
+    // }
     render() {
 
         return (

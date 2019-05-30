@@ -1,0 +1,33 @@
+  .red{
+    color:red
+  }
+  
+  .bold{
+    font-weight: bold;
+  }
+  .BtnGreen{
+    // color:red;
+    background-color: green;
+    color: white;
+    width: 150px;
+    height: 40px;
+    font-size: 18px;
+    cursor: pointer;
+    &:hover{
+      background-color: lightgreen;
+      color: black;
+    }
+  
+  }
+  .BtnRed{
+    background-color: red;
+    color: white;
+    width: 150px;
+    height: 40px;
+    font-size: 18px;
+    cursor: pointer;
+    &:hover{
+      background-color: pink;
+      color: black;
+    }
+  }

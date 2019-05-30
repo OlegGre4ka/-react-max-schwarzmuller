@@ -1,5 +1,7 @@
 import React/* { useEffect }*/ from 'react';
-import './Cockpit.scss';
+// import './Cockpit.module.scss';
+import stylesClass from './Cockpit.module.scss';
+
 import Aux from '../../hoc/Auxiliary';
 
 const Cockpit = props => {
@@ -35,8 +37,10 @@ const Cockpit = props => {
     const classes = [];
     // alert('Cockpit useEffect()');
 
-    if (props.lengthPersons <= 2) { classes.push('red') };
-    if (props.lengthPersons <= 1) { classes.push('bold') };
+    // if (props.lengthPersons <= 2) { classes.push('red') };
+    // if (props.lengthPersons <= 1) { classes.push('bold') };
+    if (props.lengthPersons <= 2) { classes.push(stylesClass.red) };
+    if (props.lengthPersons <= 1) { classes.push(stylesClass.bold) };
     return (
         // <>
         <Aux>
