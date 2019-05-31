@@ -1,10 +1,11 @@
-import React/* { useEffect }*/ from 'react';
+import React,/* { useEffect }*/{useContext} from 'react';
 // import './Cockpit.module.scss';
 import stylesClass from './Cockpit.module.scss';
-
 import Aux from '../../hoc/Auxiliary';
+import AuthContext from '../../context/auth-context';
 
 const Cockpit = props => {
+    const authContext = useContext(AuthContext)
     // useEffect(() => {
     //     console.log('[Cockpit.js],useEffect-1');
     //     // setTimeout(()=>{
@@ -47,6 +48,10 @@ const Cockpit = props => {
             <h3 >Hello React {props.title}!</h3>
 
             <p className={classes.join(' ')}>This is really working!!!</p>
+            {/* <AuthContext.Consumer>
+                {context =><button onClick={context.login}>Log in</button>}
+            </AuthContext.Consumer> */}
+<button onClick={authContext.login}>Log in</button>
         </Aux>
 
         // </>

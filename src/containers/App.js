@@ -7,6 +7,7 @@ import withClass from '../hoc/withClass';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 import ToggleButton from '../components/Cockpit/ToggleButton';
+import AuthContaxt from '../context/auth-context';
 
 // example stateful class-based component
 
@@ -22,7 +23,8 @@ class App extends React.Component {
       ],
       showPerson: false,
       showCockpit: true,
-      counterChanges: 0
+      counterChanges: 0,
+      isAuthentificate: false
     }
   }
 
@@ -36,10 +38,10 @@ class App extends React.Component {
   //     return { message: "Snapshot!" }
 
   // }
-//   componentDidMount() {
-//     console.log('[App.js],componentDidMount');
-// document.querySelector('input').focus()
-//   }
+  //   componentDidMount() {
+  //     console.log('[App.js],componentDidMount');
+  // document.querySelector('input').focus()
+  //   }
   // shouldComponentUpdate(nextProps, nextState) {
   //   console.log('[App.js],shouldComponentUpdate');
 
@@ -79,9 +81,16 @@ class App extends React.Component {
   showCockpit = () => {
     this.setState({ showCockpit: !this.state.showCockpit })
   }
+
+  loginHandler = () => {
+    this.setState(prevState => {
+      return {
+        isAuthentificate: !prevState.isAuthentificate
+      }
+    })
+  }
   render() {
     // console.log('[App.js],rendering...',this.props);
-
     const persons = (
       this.state.showPerson ? <div className={classes.AppPersons}>
         <Persons persons={this.state.persons}
@@ -95,11 +104,18 @@ class App extends React.Component {
       <>
         <ToggleButton show={this.state.showCockpit} clicked={this.showCockpit} >Show Text</ToggleButton>
         {/* <button onClick={this.showCockpit}>ShowCockpit</button> */}
-        {this.state.showCockpit && <Cockpit lengthPersons={this.state.persons.length} title={this.props.appTitle} />}
-        <ToggleButton show={this.state.showPerson} clicked={this.togglePersonsHandler}>Toggle Persons</ToggleButton>
-        <p>Counter Changes: {this.state.counterChanges}</p>
+        <AuthContaxt.Provider value={{isAuthentificate:this.state.isAuthentificate, login:this.loginHandler}}>
+          {this.state.showCockpit && <Cockpit
+            lengthPersons={this.state.persons.length}
+            title={this.props.appTitle}
+            />}
 
-        {persons}
+          <ToggleButton show={this.state.showPerson} clicked={this.togglePersonsHandler}>Toggle Persons</ToggleButton>
+          <p>Counter Changes: {this.state.counterChanges}</p>
+
+          {persons}
+        </AuthContaxt.Provider>
+
       </>
       //  </StyleRoot>
     );
